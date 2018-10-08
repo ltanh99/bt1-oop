@@ -17,12 +17,15 @@ public static void insertFromCommandline(ArrayList<Word> arr)
         arr.add(new Word(ta,tv));
     }
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
-        Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\java\\src\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
+        if(arr.size()==0){
+        Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\java\\src\\test.txt")).useDelimiter("\\s*:\\s*");
         while (sc.hasNext()) {
             String vn = sc.next();
             String en = sc.nextLine();
-            en = en.substring(3);
+            en = en.substring(1);
+            
             arr.add(new Word(en, vn));
+        }
         }
     }
     public static void dictionaryLookup(ArrayList<Word> arr)
@@ -34,7 +37,7 @@ public static void insertFromCommandline(ArrayList<Word> arr)
 
         for (Word element: arr){
             if(element.getWord_target().contains(find)){
-            System.out.printf("|%-7d|%-90s|%-70s|\n", no,element.getWord_target(),element.getWord_explain());}
+            System.out.printf("|%-7d|%-130s|%-70s|\n", no,element.getWord_target(),element.getWord_explain());}
             else no++;
         }
     }
@@ -42,27 +45,31 @@ public static void insertFromCommandline(ArrayList<Word> arr)
     {
        Collections.sort(arr, Word.Word_targetComparator);
     }
-    public Dictionary deleteWord(Dictionary dictionary)
+    public static void deleteWord(ArrayList<Word> arr)
     {
         System.out.println("Tu can xoa: ");
         Scanner scanner=new Scanner(System.in);
         String delete=scanner.nextLine();
-        for(int i=0;i<dictionary.getArray().size();i++)
+        for(int i=0;i<arr.size();i++)
         {
-            if(delete.equals(dictionary.getArray().get(i).getWord_target()))
+            if(delete.equals(arr.get(i).getWord_target()))
             {
-                dictionary.getArray().remove(dictionary.getArray().get(i));
+                arr.remove(arr.get(i));
+               
             }
         }
-        return dictionary;
+        
     }
-    public Dictionary addWord(Dictionary dictionary)
+    public static void addWord(ArrayList<Word> arr)
     {
-        insertFromCommandline(dictionary.arr);
-        return dictionary;
+        insertFromCommandline(arr);
     }
-    public Dictionary fixWord(Dictionary dictionary)
+    public static void dictionaryExportToFile() throws FileNotFoundException 
     {
-        return dictionary;
+        FileOutputStream fos= new FileOutputStream("C:\\Users\\Admin\\IdeaProjects\\java\\src\\output.txt",true);
+            PrintWriter pw= new PrintWriter(fos);
+            
+            pw.close();
+
     }
  }
