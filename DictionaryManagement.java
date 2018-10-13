@@ -27,13 +27,13 @@ public class DictionaryManagement {
     }
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
         if(arr.isEmpty()){
-            Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries.txt")).useDelimiter("\\s*:\\s*");
+            Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
             // Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\java\\src\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
             
             while (sc.hasNext()) {
-                String vn = sc.next();
-                String en = sc.nextLine();
-                en = en.substring(3);
+                String en = sc.next();
+                String vn = sc.nextLine();
+                vn = vn.substring(3);
                 arr.add(new Word(en, vn));
             }
         }
@@ -92,7 +92,8 @@ public class DictionaryManagement {
     
     public void dictionaryExportToFile(ArrayList<Word> arr) throws IOException{
         insertFromFile(arr);
-       
+        
+        sortDict(arr);
         
         try{
             File x = new File("Dictionaries2.txt");
@@ -101,12 +102,12 @@ public class DictionaryManagement {
             }
             FileWriter file = new FileWriter(x);
             try (Writer out = new BufferedWriter(file)) {
-                out.write("No               |English                |VietNamese");
+                ///out.write("No     ");
                 System.out.print(arr.size());
                 for(int i=0; i<arr.size(); i++){
-                    out.write((i+1)+"               ");
+                    //out.write((i+1)+".");
                     
-                    out.write(arr.get(i).getWord_target()+"                ");
+                    out.write(arr.get(i).getWord_target()+" : ");
                     out.write(arr.get(i).getWord_explain()+"\n");
                     
                 }
