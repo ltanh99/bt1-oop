@@ -17,7 +17,7 @@ public class DictionaryManagement {
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
         if(arr.isEmpty()){
             //Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
-            Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\sample\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
+            Scanner sc = new Scanner(new File("javaApp\\src\\sample\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
 
             while (sc.hasNext()) {
                 String en = sc.next();
@@ -26,26 +26,6 @@ public class DictionaryManagement {
                 arr.add(new Word(en, vn));
             }
         }
-    }
-    public static void tach (ArrayList<Word> arr) throws IOException {
-        insertFromFile(arr);
-        int no=1;
-        for (Word element : arr) {
-            String array1[] = element.getWord_target().split("");
-
-            int length = array1.length;
-            String s="";
-            for(int i=0;i<=length;i++)
-            {
-                if(array1[i]==",")
-                {
-                    arr.add(new Word(s,element.getWord_explain()));
-                }
-                s+=array1[i];
-            }
-            no++;
-        }
-        dictionaryExportToFile(arr);
     }
     public static int bsearch(String word, ArrayList<Word> arr, int a, int b) {
         if(b <= a)
@@ -149,7 +129,7 @@ public class DictionaryManagement {
         sortDict(arr);
 
         try{
-            File x = new File("Dictionaries2.txt");
+            File x = new File("javaApp\\src\\sample\\Dictionaries2.txt");
             if(!x.exists()){
                 x.createNewFile();
             }

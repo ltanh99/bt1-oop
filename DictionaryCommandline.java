@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package dictionary1;
+package sample;
 
-/**
- *
- * @author nguyen ngoc gioi
- */
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
+
 public class DictionaryCommandline {
     public void showAllWords(ArrayList<Word> arr )
     {
@@ -29,7 +22,7 @@ public class DictionaryCommandline {
         Random rd = new Random();
         int number;
         for(int i=1; i<=10; i++){
-              number = 1+ rd.nextInt(arr.size());
+            number = 1+ rd.nextInt(arr.size());
             System.out.printf("|%-7d|%-90s|%-70s|\n", number,arr.get(number).getWord_target(),arr.get(number).getWord_explain());
         }
     }
@@ -39,6 +32,7 @@ public class DictionaryCommandline {
     }
     public void dictionaryAdvanced(Dictionary dictionary) throws IOException{
         DictionaryManagement.insertFromFile(Dictionary.arr);
+        showAllWords(Dictionary.arr);
         while(true){
             System.out.print("Nhap 1: Tim tu.\nNhap 2: Them tu."
                     + "\nNhap 3: Xoa tu.\nNhap 4: Sua tu.\nNhap 0: Thoat.\n");
@@ -68,7 +62,7 @@ public class DictionaryCommandline {
         }
         showWords(Dictionary.arr);
     }
-    public void dictionarySearcher(ArrayList<Word> arr ) 
+    public void dictionarySearcher(ArrayList<Word> arr )
     {
         Scanner scan = new Scanner(System.in);
         System.out.print("Nhap tu can tim: ");
@@ -81,14 +75,12 @@ public class DictionaryCommandline {
             String array2[] = element.getWord_target().split("");
             String s = "";
             for(int i=0;i<length;i++)
-           {
-               s+=array2[i];
-           }
+            {
+                s+=array2[i];
+            }
             if(s.equals(find) ){
-            System.out.printf("|%-7d|%-130s|%-70s|\n", no,element.getWord_target(),element.getWord_explain());}
+                System.out.printf("|%-7d|%-130s|%-70s|\n", no,element.getWord_target(),element.getWord_explain());}
             else no++;
         }
     }
- 
 }
-
