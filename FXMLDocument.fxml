@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" blendMode="SRC_OVER" disable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="1.0" pickOnBounds="true" prefHeight="400.0" prefWidth="600.0" styleClass="" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <ListView id="" cache="false" cacheHint="DEFAULT" focusTraversable="true" layoutX="0.0" layoutY="79.0" mouseTransparent="false" opacity="1.0" prefHeight="320.9999000000025" prefWidth="200.0" visible="true">
+      <effect>
+        <InnerShadow choke="0.6111111111111112" color="#a1ff99" />
+      </effect>
+    </ListView>
+    <TextField id="search" layoutX="0.0" layoutY="51.0" prefHeight="28.0" prefWidth="200.0" promptText="Search" text="">
+      <effect>
+        <InnerShadow color="#33ff85" />
+      </effect>
+    </TextField>
+    <TextArea layoutX="200.0" layoutY="79.0" prefHeight="321.0" prefWidth="400.0" wrapText="true">
+      <effect>
+        <Lighting diffuseConstant="2.0">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <contentInput>
+            <InnerShadow color="#66ffed" />
+          </contentInput>
+          <light>
+            <javafx.scene.effect.Light.Distant color="#aabfaa" />
+          </light>
+        </Lighting>
+      </effect>
+    </TextArea>
+    <Button defaultButton="false" layoutX="200.0" layoutY="51.0" minWidth="22.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="37.0" text="🔎" textAlignment="CENTER" textFill="#003314">
+      <effect>
+        <Lighting diffuseConstant="2.0">
+          <bumpInput>
+            <Shadow />
+          </bumpInput>
+          <light>
+            <javafx.scene.effect.Light.Distant color="#009987" />
+          </light>
+        </Lighting>
+      </effect>
+    </Button>
+  </children>
+</AnchorPane>
