@@ -66,7 +66,7 @@ public class DictionaryManagement {
                 arr.remove(arr.get(i));
             }
         }
-       // return dictionary;
+     
     }
     public static void addWord(ArrayList<Word> arr){
         System.out.print("Nhap tu can them: ");
@@ -74,20 +74,51 @@ public class DictionaryManagement {
     }
     public static void fixWord(ArrayList<Word> arr){
         Scanner scan = new Scanner(System.in);
-        System.out.print("Nhap tu can sua: ");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("   Nhap tu can sua: ");
          String fix = scan.nextLine();
-         System.out.print("Tu tieng anh thay the: ");
-         String ta = scan.nextLine();
-         System.out.print("Nghia tieng viet: ");
-         String tv = scan.nextLine();
-        for(int i=0; i<arr.size(); i++){
+         for(int i=0; i<arr.size(); i++){
             if(fix.equals(arr.get(i).getWord_target())){
-                arr.get(i).setWord_target(ta);
-                arr.get(i).setWord_explain(tv) ;
+                System.out.print("   Tu ban dau: " +arr.get(i).getWord_target() +
+                " : " + arr.get(i).getWord_explain()+"\n");
             }
         }
-    
+        System.out.print("   1: Sua tieng anh.\n   2.Sua nghia tieng viet.\n   0.Quay lai.\n");
+        int a = scan.nextInt();
+        switch (a) {
+            case 1:
+                System.out.print("      Tu tieng anh thay the: ");
+                String ta = sc.nextLine();
+             
+                for(int i=0; i<arr.size(); i++){
+                    if(fix.equals(arr.get(i).getWord_target())){
+                        arr.get(i).setWord_target(ta);
+                       
+                        System.out.print("   Sua thanh: " +arr.get(i).getWord_target() +
+                                " : " + arr.get(i).getWord_explain()+"\n");
+                    }
+                }   break;
+            case 2:
+                
+                System.out.print("      Nghia tieng viet: ");
+                String tv = sc.nextLine();
+                for(int i=0; i<arr.size(); i++){
+                    if(fix.equals(arr.get(i).getWord_target())){
+                                               
+                        arr.get(i).setWord_explain(tv) ;
+                        System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
+                                " : " + arr.get(i).getWord_explain()+"\n");
+                    }
+                }   break;
+            case 0:
+                break;
+            default:
+                System.out.print("Nhap lai.\n");
+                fixWord(arr);
+                break;
+        }
     }
+    
 
     
     public void dictionaryExportToFile(ArrayList<Word> arr) throws IOException{
@@ -102,10 +133,9 @@ public class DictionaryManagement {
             }
             FileWriter file = new FileWriter(x);
             try (Writer out = new BufferedWriter(file)) {
-                ///out.write("No     ");
-                System.out.print(arr.size());
+              
                 for(int i=0; i<arr.size(); i++){
-                    //out.write((i+1)+".");
+                  
                     
                     out.write(arr.get(i).getWord_target()+" : ");
                     out.write(arr.get(i).getWord_explain()+"\n");

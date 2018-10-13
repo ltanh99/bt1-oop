@@ -30,7 +30,7 @@ public class DictionaryCommandline {
         int number;
         for(int i=1; i<=10; i++){
               number = 1+ rd.nextInt(arr.size());
-            System.out.printf("|%-7d|%-90s|%-70s|\n", i,arr.get(number).getWord_target(),arr.get(number).getWord_explain());
+            System.out.printf("|%-7d|%-90s|%-70s|\n", number,arr.get(number).getWord_target(),arr.get(number).getWord_explain());
         }
     }
     public void dictionaryBasic() {
@@ -39,25 +39,34 @@ public class DictionaryCommandline {
     }
     public void dictionaryAdvanced(Dictionary dictionary) throws IOException{
         DictionaryManagement.insertFromFile(Dictionary.arr);
-        showWords(Dictionary.arr);
-        DictionaryManagement.dictionaryLookup(Dictionary.arr);
-        System.out.print("Nhap 1: Neu muon xoa tu.\nNhap 2: Neu them tu."
-                + "\nNhap 3: Neu sua tu.\nNhap so khac: Neu khong lam gi ca.\n");
-        Scanner sc = new Scanner(System.in);
-        int  a= sc.nextInt();
-        switch (a) {
-            case 1:
-                DictionaryManagement.deleteWord(Dictionary.arr);
-                break;
-            case 2:
-                DictionaryManagement.addWord(Dictionary.arr);
-                break;
-            case 3:
-                DictionaryManagement.fixWord(Dictionary.arr);
-                break;
-            default:
-                break;
+        while(true){
+            System.out.print("Nhap 1: Tim tu.\nNhap 2: Them tu."
+                    + "\nNhap 3: Xoa tu.\nNhap 4: Sua tu.\nNhap 0: Thoat.\n");
+            Scanner sc = new Scanner(System.in);
+            int  a= sc.nextInt();
+            switch (a) {
+                case 1:
+                    DictionaryManagement.dictionaryLookup(Dictionary.arr);
+                    break;
+                case 2:
+                    DictionaryManagement.addWord(Dictionary.arr);
+                    break;
+                case 3:
+                    DictionaryManagement.deleteWord(Dictionary.arr);
+                    break;
+
+                case 4:
+                    DictionaryManagement.fixWord(Dictionary.arr);
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.print("Nhap lai.\n");
+                    dictionaryAdvanced(dictionary);
+                    break;
+            }if(a ==0) break;
         }
+        showWords(Dictionary.arr);
     }
     public void dictionarySearcher(ArrayList<Word> arr ) 
     {
