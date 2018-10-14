@@ -17,15 +17,10 @@ public class Dictionary1 {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
-	// write your code here
-        //1
-        //InputStream in=Main.class.getClassLoader().getResourceAsStream("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\dictionaries1.txt");
         Dictionary dictionary = new Dictionary();
-       DictionaryManagement dictionaryManagement = new DictionaryManagement();
-       DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
-
-
-       dictionaryCommandline.dictionaryAdvanced(dictionary);
-       DictionaryManagement.dictionaryExportToFile(Dictionary.arr);
+        DictionaryManagement dictionaryManagement = new DictionaryManagement();
+        DictionaryCommandline dictionaryCommandline = new DictionaryCommandline();
+        dictionaryCommandline.dictionaryAdvanced(dictionary);
+        DictionaryManagement.dictionaryExportToFile(Dictionary.arr);
     }
 }

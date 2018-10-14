@@ -29,37 +29,19 @@ public class DictionaryManagement {
     }
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
         if(arr.isEmpty()){        
-            Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\dictionaries1.txt")).useDelimiter("\\s*:\\s*");
-            //Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\sample\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
+            InputStream input = new FileInputStream("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\src\\txt\\Dictionaries1.txt");
+            Scanner sc = new Scanner(new InputStreamReader(input)).useDelimiter("\\s*:\\s*");
+            //Scanner sc = new Scanner(new File("C:\\\\Users\\\\nguyen ngoc gioi\\\\Documents\\\\NetBeansProjects\\\\Dictionary1\\\\src\\\\txt\\\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
 
             while (sc.hasNext()) {
-                String en = sc.next();
-                String vn = sc.nextLine();
-                vn = vn.substring(3);
-                arr.add(new Word(en, vn));
+                String ta = sc.next();
+                String tv = sc.nextLine();
+                tv = tv.substring(3);
+                arr.add(new Word(ta, tv));
             }
         }
     }
-    public static void tach (ArrayList<Word> arr) throws IOException {
-        insertFromFile(arr);
-        int no=1;
-        for (Word element : arr) {
-            String array1[] = element.getWord_target().split("");
-
-            int length = array1.length;
-            String s="";
-            for(int i=0;i<=length;i++)
-            {
-                if(",".equals(array1[i]))
-                {
-                    arr.add(new Word(s,element.getWord_explain()));
-                }
-                s+=array1[i];
-            }
-            no++;
-        }
-        dictionaryExportToFile(arr);
-    }
+    
     public static int bsearch(String word, ArrayList<Word> arr, int a, int b) {
         if(b <= a)
             return -1;
@@ -104,7 +86,6 @@ public class DictionaryManagement {
 
     }
     public static void addWord(ArrayList<Word> arr){
-        System.out.print("Nhap tu can them: ");
         insertFromCommandline(arr);
     }
     public static void fixWord(ArrayList<Word> arr){
@@ -125,8 +106,7 @@ public class DictionaryManagement {
             int x = sc.nextInt();
             if(x ==1){
                 addWord(arr);
-            }
-                    
+            }       
         }else{
             System.out.print("1: Sua tieng anh.\n2.Sua nghia tieng viet.\n0.Quay lai.\n");
             int a = sc.nextInt();
@@ -134,22 +114,18 @@ public class DictionaryManagement {
                 case 1:
                     System.out.print("Tu tieng anh thay the: ");
                     String ta = scan.nextLine();
-
                     for(int i=0; i<arr.size(); i++){
                         if(fix.equals(arr.get(i).getWord_target())){
                             arr.get(i).setWord_target(ta);
-
                             System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
                                     " : " + arr.get(i).getWord_explain()+"\n");
                         }
                     }   break;
                 case 2:
-
                     System.out.print("Nghia tieng viet: ");
                     String tv = scan.nextLine();
                     for(int i=0; i<arr.size(); i++){
                         if(fix.equals(arr.get(i).getWord_target())){
-
                             arr.get(i).setWord_explain(tv) ;
                             System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
                                     " : " + arr.get(i).getWord_explain()+"\n");
@@ -165,35 +141,23 @@ public class DictionaryManagement {
         }
     }
 
-
-
     public static void dictionaryExportToFile(ArrayList<Word> arr) throws IOException{
         insertFromFile(arr);
-
         sortDict(arr);
-
         try{
-            File x = new File("Dictionaries2.txt");
+            File x = new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\src\\txt\\Dictionaries2.txt");
             if(!x.exists()){
                 x.createNewFile();
             }
             FileWriter file = new FileWriter(x);
             try (Writer out = new BufferedWriter(file)) {
-
                 for(int i=0; i<arr.size(); i++){
-
-
                     out.write(arr.get(i).getWord_target()+" : ");
-                    out.write(arr.get(i).getWord_explain()+"\n");
-
+                    out.write(arr.get(i).getWord_explain()+ "\n");
                 }
             }
-
-        }catch(IOException e){
-
-        }
+        }catch(IOException e){}
     }
-    //C:\Users\Admin\IdeaProjects\javaApp\src\sample\
 }
 
 
