@@ -1,23 +1,36 @@
-package sample;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dictionary1;
 
+/**
+ *
+ * @author nguyen ngoc gioi
+ */
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
+import java.io.File;
 import java.util.Collections;
+
+
 
 public class DictionaryManagement {
     public static void insertFromCommandline(ArrayList<Word> arr)
     {
         Scanner scan = new Scanner(System.in);
+        System.out.print("Nhap tu tieng anh: ");
         String ta = scan.nextLine();
+        System.out.print("Nhap nghia tieng viet: ");
         String tv = scan.nextLine();
         arr.add(new Word(ta,tv));
     }
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
-        if(arr.isEmpty()){
-            //Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
-            Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\sample\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
+        if(arr.isEmpty()){        
+            Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\dictionaries1.txt")).useDelimiter("\\s*:\\s*");
+            //Scanner sc = new Scanner(new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\sample\\VN-EN Dict.txt")).useDelimiter("\\s*:\\s*");
 
             while (sc.hasNext()) {
                 String en = sc.next();
@@ -26,6 +39,26 @@ public class DictionaryManagement {
                 arr.add(new Word(en, vn));
             }
         }
+    }
+    public static void tach (ArrayList<Word> arr) throws IOException {
+        insertFromFile(arr);
+        int no=1;
+        for (Word element : arr) {
+            String array1[] = element.getWord_target().split("");
+
+            int length = array1.length;
+            String s="";
+            for(int i=0;i<=length;i++)
+            {
+                if(",".equals(array1[i]))
+                {
+                    arr.add(new Word(s,element.getWord_explain()));
+                }
+                s+=array1[i];
+            }
+            no++;
+        }
+        dictionaryExportToFile(arr);
     }
     public static int bsearch(String word, ArrayList<Word> arr, int a, int b) {
         if(b <= a)
@@ -77,47 +110,58 @@ public class DictionaryManagement {
     public static void fixWord(ArrayList<Word> arr){
         Scanner scan = new Scanner(System.in);
         Scanner sc = new Scanner(System.in);
-        System.out.print("   Nhap tu can sua: ");
+        System.out.print("Nhap tu can sua: ");
         String fix = scan.nextLine();
+        boolean check = false;
         for(int i=0; i<arr.size(); i++){
             if(fix.equals(arr.get(i).getWord_target())){
-                System.out.print("   Tu ban dau: " +arr.get(i).getWord_target() +
+                check = true;
+                System.out.print("Tu ban dau: " +arr.get(i).getWord_target() +
                         " : " + arr.get(i).getWord_explain()+"\n");
             }
-        }
-        System.out.print("   1: Sua tieng anh.\n   2.Sua nghia tieng viet.\n   0.Quay lai.\n");
-        int a = scan.nextInt();
-        switch (a) {
-            case 1:
-                System.out.print("      Tu tieng anh thay the: ");
-                String ta = sc.nextLine();
+        }if(check ==false){
+            System.out.print("Khong tim thay tu.\nBan muon them tu?\n");
+            System.out.print("1.Them tu.\n0.Quay lai.\n");
+            int x = sc.nextInt();
+            if(x ==1){
+                addWord(arr);
+            }
+                    
+        }else{
+            System.out.print("1: Sua tieng anh.\n2.Sua nghia tieng viet.\n0.Quay lai.\n");
+            int a = sc.nextInt();
+            switch (a) {
+                case 1:
+                    System.out.print("Tu tieng anh thay the: ");
+                    String ta = scan.nextLine();
 
-                for(int i=0; i<arr.size(); i++){
-                    if(fix.equals(arr.get(i).getWord_target())){
-                        arr.get(i).setWord_target(ta);
+                    for(int i=0; i<arr.size(); i++){
+                        if(fix.equals(arr.get(i).getWord_target())){
+                            arr.get(i).setWord_target(ta);
 
-                        System.out.print("   Sua thanh: " +arr.get(i).getWord_target() +
-                                " : " + arr.get(i).getWord_explain()+"\n");
-                    }
-                }   break;
-            case 2:
+                            System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
+                                    " : " + arr.get(i).getWord_explain()+"\n");
+                        }
+                    }   break;
+                case 2:
 
-                System.out.print("      Nghia tieng viet: ");
-                String tv = sc.nextLine();
-                for(int i=0; i<arr.size(); i++){
-                    if(fix.equals(arr.get(i).getWord_target())){
+                    System.out.print("Nghia tieng viet: ");
+                    String tv = scan.nextLine();
+                    for(int i=0; i<arr.size(); i++){
+                        if(fix.equals(arr.get(i).getWord_target())){
 
-                        arr.get(i).setWord_explain(tv) ;
-                        System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
-                                " : " + arr.get(i).getWord_explain()+"\n");
-                    }
-                }   break;
-            case 0:
-                break;
-            default:
-                System.out.print("Nhap lai.\n");
-                fixWord(arr);
-                break;
+                            arr.get(i).setWord_explain(tv) ;
+                            System.out.print("Sua thanh: " +arr.get(i).getWord_target() +
+                                    " : " + arr.get(i).getWord_explain()+"\n");
+                        }
+                    }   break;
+                case 0:
+                    break;
+                default:
+                    System.out.print("Nhap lai.\n");
+                    fixWord(arr);
+                    break;
+            }
         }
     }
 
@@ -129,7 +173,7 @@ public class DictionaryManagement {
         sortDict(arr);
 
         try{
-            File x = new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\sample\\Dictionaries2.txt");
+            File x = new File("Dictionaries2.txt");
             if(!x.exists()){
                 x.createNewFile();
             }
@@ -151,3 +195,5 @@ public class DictionaryManagement {
     }
     //C:\Users\Admin\IdeaProjects\javaApp\src\sample\
 }
+
+
