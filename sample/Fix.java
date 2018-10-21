@@ -2,7 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -10,29 +10,32 @@ public class Fix {
     @FXML
     private TextField ta_old;
     @FXML
-    private TextField tv_old;
-    @FXML
     private TextField ta_new;
     @FXML
     private TextField tv_new;
-
-
-
     public void fixWord(ActionEvent event) throws IOException {
             String taOld = ta_old.getText();
             String taNew = ta_new.getText();
-            String tvOld = tv_old.getText();
             String tvNew = tv_new.getText();
-            for (int i = 0; i < Dictionary.getArray().size(); i++) {
-                if (taOld.equals(Dictionary.getArray().get(i).getWord_target())) {
-                    Dictionary.getArray().get(i).setWord_target(taNew);}
-                if(tvOld.equals(Dictionary.getArray().get(i).getWord_target())){
-                    Dictionary.getArray().get(i).setWord_explain(tvNew) ;
+            int test = 0;
+        for (int i = 0; i < Dictionary.getArray().size(); i++)
+        {
+            if (taOld.equals(Dictionary.getArray().get(i).getWord_target()))
+            {
+                Dictionary.getArray().get(i).setWord_explain(tvNew);
+                if(tvNew!="") {
+                    Dictionary.getArray().get(i).setWord_target(taNew);
                 }
+                test++;
+            }
+        }
+            if(test == 0)
+            {
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("Không tìm thấy từ đã nhập");
+                a.show();
             }
             DictionaryManagement.dictionaryExportToFile(Dictionary.getArray());
             System.out.println("Done");
         }
 }
-
-

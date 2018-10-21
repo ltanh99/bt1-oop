@@ -42,8 +42,10 @@ public class Controller implements Initializable {
         private TextField search;
         @FXML
         private TextArea trans;
+        @FXML
+        private ListView<String> dictList;
 
-        public void submit(ActionEvent event) {
+    public void submit(ActionEvent event) {
             String Search = search.getText();
             String find = search(tmp.getArray(), Search);
             trans.setText(find);
@@ -83,12 +85,7 @@ public class Controller implements Initializable {
     ObservableList list= FXCollections.observableArrayList();
 
 
-    @FXML
-    public ListView<String> dictList;
-    public ListView<String> getDictList()
-    {
-        return dictList;
-    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
