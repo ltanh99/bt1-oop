@@ -13,6 +13,8 @@ public class Fix {
     private TextField ta_new;
     @FXML
     private TextField tv_new;
+    @FXML
+    private Label resultFix;
     public void fixWord(ActionEvent event) throws IOException {
             String taOld = ta_old.getText();
             String taNew = ta_new.getText();
@@ -37,5 +39,9 @@ public class Fix {
             }
             DictionaryManagement.dictionaryExportToFile(Dictionary.getArray());
             System.out.println("Done");
+            ta_new.setText("");
+            ta_old.setText("");
+            tv_new.setText("");
+            resultFix.setText("Done");
         }
 }

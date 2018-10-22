@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.awt.event.ActionEvent;
@@ -9,6 +10,9 @@ import java.io.IOException;
 public class del {
     @FXML
     private TextField ta;
+    @FXML
+    private Label resultDel;
+
     public void delWord(javafx.event.ActionEvent event) throws IOException {
         String taDel =  ta.getText();
         for(int i =0; i<Dictionary.getArray().size();i++){
@@ -18,5 +22,7 @@ public class del {
         }
         DictionaryManagement.dictionaryExportToFile(Dictionary.getArray());
         System.out.println("Done");
+        ta.setText("");
+        resultDel.setText("Done");
     }
 }

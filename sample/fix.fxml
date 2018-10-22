@@ -14,5 +14,6 @@
       <TextField fx:id="ta_new" layoutX="8.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
       <TextField fx:id="tv_new" layoutX="348.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
       <Button layoutX="261.0" layoutY="305.0" mnemonicParsing="false" onAction="#fixWord" prefHeight="2.0" prefWidth="50.0" text="Fix" />
+      <Label fx:id="resultFix" layoutX="272.0" layoutY="262.0" />
    </children>
 </AnchorPane>
