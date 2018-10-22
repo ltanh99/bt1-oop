@@ -2,7 +2,6 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -24,9 +23,8 @@ public class add {
         Dictionary.getArray().add(new Word(taNew,tvNew));
         DictionaryManagement.dictionaryExportToFile(Dictionary.getArray());
         System.out.println("Done");
+        result.setText("Done");
         ta.setText("");
         tv.setText("");
-        result.setText("Done");
     }
-
 }

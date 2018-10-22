@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="375.0" prefWidth="572.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Fix">
-   <children>
-      <Label alignment="CENTER" layoutX="237.0" layoutY="73.0" prefHeight="17.0" prefWidth="98.0" text="Fix Word" />
-      <TextField fx:id="ta_old" layoutX="180.0" layoutY="107.0" prefHeight="25.0" prefWidth="212.0" />
-      <Label layoutX="47.0" layoutY="161.0" prefHeight="17.0" prefWidth="106.0" text="English new Word" />
-      <Label layoutX="392.0" layoutY="169.0" prefHeight="17.0" prefWidth="125.0" text="Vietnamese new Word" />
-      <TextField fx:id="ta_new" layoutX="8.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="tv_new" layoutX="348.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
-      <Button layoutX="261.0" layoutY="305.0" mnemonicParsing="false" onAction="#fixWord" prefHeight="2.0" prefWidth="50.0" text="Fix" />
-      <Label fx:id="resultFix" layoutX="272.0" layoutY="262.0" />
-   </children>
+<AnchorPane prefHeight="375.0" prefWidth="572.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="sample.Fix">
+  <children>
+    <Label alignment="CENTER" layoutX="237.0" layoutY="73.0" prefHeight="17.0" prefWidth="98.0" text="Fix Word" />
+    <TextField fx:id="ta_old" layoutX="180.0" layoutY="107.0" prefHeight="25.0" prefWidth="212.0" />
+    <Label layoutX="47.0" layoutY="161.0" prefHeight="17.0" prefWidth="106.0" text="English new Word" />
+    <Label layoutX="392.0" layoutY="169.0" prefHeight="17.0" prefWidth="125.0" text="Vietnamese new Word" />
+    <TextField fx:id="ta_new" layoutX="8.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
+    <TextField fx:id="tv_new" layoutX="348.0" layoutY="190.0" prefHeight="25.0" prefWidth="212.0" />
+    <Button layoutX="261.0" layoutY="305.0" mnemonicParsing="false" onAction="#fixWord" prefHeight="2.0" prefWidth="50.0" text="Fix" />
+    <Label fx:id="result" layoutX="272.0" layoutY="269.0" text="" />
+  </children>
 </AnchorPane>

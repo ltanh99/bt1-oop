@@ -34,36 +34,34 @@ import marytts.signalproc.effects.*;
 import javax.sound.sampled.AudioInputStream;
 
 public class Controller implements Initializable {
-        TextToSpeech ts = new TextToSpeech();
-        Dictionary tmp = new Dictionary();
+    TextToSpeech ts = new TextToSpeech();
+    Dictionary tmp = new Dictionary();
 
-        boolean add= true;
-        @FXML
-        private TextField search;
-        @FXML
-        private TextArea trans;
-        @FXML
-        private ListView<String> dictList;
+    boolean add= true;
+    @FXML
+    private TextField search;
+    @FXML
+    private TextArea trans;
 
     public void submit(ActionEvent event) {
-            String Search = search.getText();
-            String find = search(tmp.getArray(), Search);
-            trans.setText(find);
-        }
-        public void speak(ActionEvent event)
-        {
-            ts.speak(search.getText(),2.0f,true,true);
-        }
-        public void openAdd(ActionEvent event) throws IOException {
-            Parent addPage = FXMLLoader.load(getClass().getResource("add.fxml"));
-            Scene addSc = new Scene(addPage);
-            //Stage addStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Stage addStage = new Stage(StageStyle.DECORATED);
-            addStage.setScene(addSc);
-            addStage.setTitle("Add a word");
-            addStage.show();
+        String Search = search.getText();
+        String find = search(tmp.getArray(), Search);
+        trans.setText(find);
+    }
+    public void speak(ActionEvent event)
+    {
+        ts.speak(search.getText(),2.0f,true,true);
+    }
+    public void openAdd(ActionEvent event) throws IOException {
+        Parent addPage = FXMLLoader.load(getClass().getResource("add.fxml"));
+        Scene addSc = new Scene(addPage);
+        //Stage addStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage addStage = new Stage(StageStyle.DECORATED);
+        addStage.setScene(addSc);
+        addStage.setTitle("Add a word");
+        addStage.show();
 
-        }
+    }
     public void openDel(ActionEvent event) throws IOException {
         Parent delPage = FXMLLoader.load(getClass().getResource("del.fxml"));
         Scene delSc = new Scene(delPage);
@@ -83,9 +81,12 @@ public class Controller implements Initializable {
         fixStage.show();
     }
     ObservableList list= FXCollections.observableArrayList();
-
-
-
+    @FXML
+    public ListView<String> dictList;
+    public ListView<String> getDictList()
+    {
+        return dictList;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -97,7 +98,7 @@ public class Controller implements Initializable {
     public void data(ArrayList<Word> arr) throws FileNotFoundException {
 
         list.removeAll(list);
-        InputStream input = new FileInputStream("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\txt\\VN-EN Dict.txt");
+        InputStream input = new FileInputStream("C:\\Users\\nguyen ngoc gioi\\IdeaProjects\\javaApp\\src\\txt\\Dictionaries.txt");
         //Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
         Scanner sc = new Scanner(new InputStreamReader(input)).useDelimiter("\\s*:\\s*");
         while (sc.hasNext()) {
@@ -108,9 +109,9 @@ public class Controller implements Initializable {
         }
         //DictionaryManagement.sortDict(arr);
 
-            for (int i = 0; i < tmp.getArray().size(); i++) {
-                list.add(tmp.getArray().get(i).getWord_target());
-            }
+        for (int i = 0; i < tmp.getArray().size(); i++) {
+            list.add(tmp.getArray().get(i).getWord_target());
+        }
 
         dictList.getItems().addAll(list);
         dictList.getSelectionModel().selectedItemProperty().addListener(
@@ -147,7 +148,6 @@ public class Controller implements Initializable {
 
         });
     }
-
     public String search(ArrayList<Word> arr,String find) {
         DictionaryManagement.sortDict(arr);
         int index=DictionaryManagement.bsearch(find,arr,0,arr.size());
@@ -157,8 +157,5 @@ public class Controller implements Initializable {
             return arr.get(index).getWord_explain();
         }
     }
-
-
-
 }
 

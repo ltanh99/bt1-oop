@@ -16,10 +16,9 @@ public class DictionaryManagement {
     }
     public static void insertFromFile(ArrayList<Word> arr) throws IOException {
         if(arr.isEmpty()){
-            InputStream input = new FileInputStream("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\txt\\VN-EN Dict.txt");
+            InputStream input = new FileInputStream("C:\\Users\\nguyen ngoc gioi\\IdeaProjects\\JavaApp\\src\\txt\\Dictionaries.txt");
             //Scanner sc = new Scanner(new File("C:\\Users\\nguyen ngoc gioi\\Documents\\NetBeansProjects\\Dictionary1\\Dictionaries1.txt")).useDelimiter("\\s*:\\s*");
             Scanner sc = new Scanner(new InputStreamReader(input)).useDelimiter("\\s*:\\s*");
-
             while (sc.hasNext()) {
                 String en = sc.next();
                 String vn = sc.nextLine();
@@ -56,7 +55,7 @@ public class DictionaryManagement {
             System.out.printf("|%-7d|%-90s|%-70s|\n", index, arr.get(index).getWord_target(), arr.get(index).getWord_explain());
         }
     }
-        public static void sortDict(ArrayList<Word> arr)
+    public static void sortDict(ArrayList<Word> arr)
     {
         Collections.sort(arr, Word.Word_targetComparator);
     }
@@ -130,7 +129,7 @@ public class DictionaryManagement {
 
         try{
             //OutputStream output;
-            File x = new File("C:\\Users\\Admin\\IdeaProjects\\javaApp\\src\\txt\\VN-EN Dict.txt");
+            File x = new File("C:\\Users\\nguyen ngoc gioi\\IdeaProjects\\JavaApp\\src\\txt\\Dictionaries.txt");
             if(!x.exists()){
                 x.createNewFile();
             }

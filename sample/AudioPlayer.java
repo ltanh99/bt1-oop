@@ -42,7 +42,6 @@ public class AudioPlayer extends Thread {
      * The status of the player
      *
      * @author GOXR3PLUS
-     *
      */
     public enum Status {
         /**
@@ -57,7 +56,6 @@ public class AudioPlayer extends Thread {
 
     /**
      * AudioPlayer which can be used if audio stream is to be set separately, using setAudio().
-     *
      */
     public AudioPlayer() {
     }
@@ -123,20 +121,13 @@ public class AudioPlayer extends Thread {
     }
 
     /**
-     *
-     * @param audioFile
-     *            audiofile
-     * @param line
-     *            line
-     * @param lineListener
-     *            lineListener
-     * @param outputMode
-     *            if MONO, force output to be mono; if STEREO, force output to be STEREO; if LEFT_ONLY, play a mono signal over the left channel of a
-     *            stereo output, or mute the right channel of a stereo signal; if RIGHT_ONLY, do the same with the right output channel.
-     * @throws IOException
-     *             IOException
-     * @throws UnsupportedAudioFileException
-     *             UnsupportedAudioFileException
+     * @param audioFile    audiofile
+     * @param line         line
+     * @param lineListener lineListener
+     * @param outputMode   if MONO, force output to be mono; if STEREO, force output to be STEREO; if LEFT_ONLY, play a mono signal over the left channel of a
+     *                     stereo output, or mute the right channel of a stereo signal; if RIGHT_ONLY, do the same with the right output channel.
+     * @throws IOException                   IOException
+     * @throws UnsupportedAudioFileException UnsupportedAudioFileException
      */
     public AudioPlayer(File audioFile, SourceDataLine line, LineListener lineListener, int outputMode) throws IOException, UnsupportedAudioFileException {
         this.ais = AudioSystem.getAudioInputStream(audioFile);
@@ -146,16 +137,11 @@ public class AudioPlayer extends Thread {
     }
 
     /**
-     *
-     * @param ais
-     *            ais
-     * @param line
-     *            line
-     * @param lineListener
-     *            lineListener
-     * @param outputMode
-     *            if MONO, force output to be mono; if STEREO, force output to be STEREO; if LEFT_ONLY, play a mono signal over the left channel of a
-     *            stereo output, or mute the right channel of a stereo signal; if RIGHT_ONLY, do the same with the right output channel.
+     * @param ais          ais
+     * @param line         line
+     * @param lineListener lineListener
+     * @param outputMode   if MONO, force output to be mono; if STEREO, force output to be STEREO; if LEFT_ONLY, play a mono signal over the left channel of a
+     *                     stereo output, or mute the right channel of a stereo signal; if RIGHT_ONLY, do the same with the right output channel.
      */
     public AudioPlayer(AudioInputStream ais, SourceDataLine line, LineListener lineListener, int outputMode) {
         this.ais = ais;
@@ -214,7 +200,7 @@ public class AudioPlayer extends Thread {
 
         // Better type
         if (line != null && line.isControlSupported(FloatControl.Type.MASTER_GAIN))
-            ( (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN) ).setValue((float) ( 20 * Math.log10(fGain <= 0.0 ? 0.0000 : fGain) ));
+            ((FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN)).setValue((float) (20 * Math.log10(fGain <= 0.0 ? 0.0000 : fGain)));
         // OR (Math.log(fGain == 0.0 ? 0.0000 : fGain) / Math.log(10.0))
 
         // if (line != null)
@@ -251,7 +237,7 @@ public class AudioPlayer extends Thread {
                 if (!bIsSupportedDirectly) {
                     AudioFormat sourceFormat = audioFormat;
                     AudioFormat targetFormat = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sourceFormat.getSampleRate(), sourceFormat.getSampleSizeInBits(),
-                            sourceFormat.getChannels(), sourceFormat.getChannels() * ( sourceFormat.getSampleSizeInBits() / 8 ), sourceFormat.getSampleRate(),
+                            sourceFormat.getChannels(), sourceFormat.getChannels() * (sourceFormat.getSampleSizeInBits() / 8), sourceFormat.getSampleRate(),
                             sourceFormat.isBigEndian());
 
                     ais = AudioSystem.getAudioInputStream(targetFormat, ais);
@@ -274,7 +260,7 @@ public class AudioPlayer extends Thread {
 
         int nRead = 0;
         byte[] abData = new byte[65532];
-        while ( ( nRead != -1 ) && ( !exitRequested )) {
+        while ((nRead != -1) && (!exitRequested)) {
             try {
                 nRead = ais.read(abData, 0, abData.length);
             } catch (IOException ex) {
@@ -289,5 +275,4 @@ public class AudioPlayer extends Thread {
         }
         line.close();
     }
-
 }
